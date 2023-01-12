@@ -1,4 +1,4 @@
-import * as RoundHandler from './game/round.js'
+import * as RoundHandler from '../game/round.js'
 import { world } from '@minecraft/server'
 
 world.events.beforeChat.subscribe(event => {
