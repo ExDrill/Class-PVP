@@ -17,12 +17,6 @@ world.events.tick.subscribe(() => {
     }
 })
 
-world.events.beforeChat.subscribe(event => {
-    if (event.message == "start") {
-        startRound()
-    }
-})
-
 export function startRound() {
     world.say("Round started")
     setRoundStarted(true)
