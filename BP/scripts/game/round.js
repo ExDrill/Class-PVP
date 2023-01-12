@@ -18,15 +18,24 @@ world.events.tick.subscribe(() => {
 })
 
 export function startRound() {
-    world.say("Round started")
-    setRoundStarted(true)
-    setRoundTime(200)
+    if (!isRoundStarted()) {
+        world.say("Round started")
+        setRoundStarted(true)
+        setRoundTime(200)
+    } else {
+        console.error("Failed to start round, there is already an ongoing round!")
+    }
 }
 
 export function endRound() {
-    world.say("Round ended")
-    setRoundStarted(false)
-    setRoundTime(0)
+    if (isRoundStarted()) {
+        world.say("Round ended")
+        setRoundStarted(false)
+        setRoundTime(0)
+    } else {
+        console.error("Failed to end round, there is no ongoing round!")
+    }
+    
 }
 
 export function getRoundTime() {
