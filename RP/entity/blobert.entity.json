@@ -1,0 +1,24 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "classpvp:blobert",
+			"materials": {
+				"default": "entity"
+			},
+			"textures": {
+				"default": "textures/entity/blobert/blobert",
+				"blinking": "textures/entity/blobert/blobert_blinking"
+			},
+			"geometry": {
+				"default": "geometry.blobert"
+			},
+			"render_controllers": [
+				"controller.render.blobert"
+			],
+			"spawn_egg": {
+				"texture": "spawn_egg"
+			}
+		}
+	}
+}

@@ -1,0 +1,183 @@
+{
+	"format_version": "1.19.50",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "minecraft:player",
+			"is_spawnable": false,
+			"is_summonable": false,
+			"is_experimental": false
+		},
+		"component_groups": {
+			"classpvp:default": {
+				"minecraft:health": {
+					"value": 20,
+					"max": 20
+				},
+				"minecraft:movement": {
+					"value": 0.1
+				},
+				"minecraft:scale": {
+					"value": 1
+				},
+				"minecraft:attack": {
+					"damage": 1
+				},
+				"minecraft:exhaustion_values": {
+					"heal": 6,
+					"jump": 0.05,
+					"sprint_jump": 0.2,
+					"mine": 0.005,
+					"attack": 0.1,
+					"damage": 0.1,
+					"walk": 0.0,
+					"sprint": 0.1,
+					"swim": 0.01
+				}
+			},
+			"classpvp:knight": {
+				"minecraft:health": {
+					"value": 20,
+					"max": 20
+				},
+				"minecraft:movement": {
+					"value": 0.1
+				}
+			},
+			"classpvp:archer": {
+				"minecraft:health": {
+					"value": 15,
+					"max": 15
+				},
+				"minecraft:movement": {
+					"value": 0.12
+				}
+			},
+			"classpvp:tank": {
+				"minecraft:health": {
+					"value": 30,
+					"max": 30
+				},
+				"minecraft:movement": {
+					"value": 0.06
+				}
+			},
+			"classpvp:gunner": {
+				"minecraft:health": {
+					"value": 25,
+					"max": 25
+				},
+				"minecraft:movement": {
+					"value": 0.08
+				}
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": [
+					"player"
+				]
+			},
+			"minecraft:is_hidden_when_invisible": {},
+			"minecraft:loot": {
+				"table": "loot_tables/empty.json"
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.8
+			},
+			"minecraft:can_climb": {},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:player.saturation": {
+				"value": 5,
+				"max": 20
+			},
+			"minecraft:player.exhaustion": {
+				"value": 0,
+				"max": 20
+			},
+			"minecraft:player.level": {
+				"value": 0,
+				"max": 24791
+			},
+			"minecraft:player.experience": {
+				"value": 0,
+				"max": 1
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": -1,
+				"inhale_time": 3.75,
+				"generates_bubbles": false
+			},
+			"minecraft:nameable": {
+				"always_show": true,
+				"allow_name_tag_renaming": false
+			},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:block_climber": {}
+		},
+		"events": {
+			"classpvp:reset_class": {
+				"add": {
+					"component_groups": [
+						"classpvp:default"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"classpvp:knight",
+						"classpvp:archer",
+						"classpvp:tank",
+						"classpvp:gunner"
+					]
+				}
+			},
+			"classpvp:knight": {
+				"add": {
+					"component_groups": [
+						"classpvp:knight"
+					]
+				}
+			},
+			"classpvp:archer": {
+				"add": {
+					"component_groups": [
+						"classpvp:archer"
+					]
+				}
+			},
+			"classpvp:tank": {
+				"add": {
+					"component_groups": [
+						"classpvp:tank"
+					]
+				}
+			},
+			"classpvp:gunner": {
+				"add": {
+					"component_groups": [
+						"classpvp:gunner"
+					]
+				}
+			}
+		}
+	}
+}

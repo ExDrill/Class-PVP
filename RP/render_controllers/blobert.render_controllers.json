@@ -1,0 +1,20 @@
+{
+	"format_version": "1.8.0",
+	"render_controllers": {
+		"controller.render.blobert": {
+			"arrays": {
+				"textures": {
+					"Array.blinking": [
+						"Texture.default", // 0, false
+						"Texture.blinking" // 1, true
+					]
+				}
+			},
+			"geometry": "Geometry.default",
+			"materials": [ {"*": "Material.default"} ],
+			"textures": [
+				"Array.blinking[query.property('classpvp:blinking')]"
+			]
+		}
+	}
+}

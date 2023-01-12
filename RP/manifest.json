@@ -1,0 +1,44 @@
+{
+	"format_version": 2,
+	"metadata": {
+		"authors": [
+			"ExDrill"
+		]
+	},
+	"header": {
+		"name": "Class PVP",
+		"description": "",
+		"min_engine_version": [
+			1,
+			19,
+			50
+		],
+		"uuid": "b3ba8465-c4fa-4b78-a173-b7691d5c6681",
+		"version": [
+			1,
+			0,
+			0
+		]
+	},
+	"modules": [
+		{
+			"type": "resources",
+			"uuid": "ce8fea13-3d1c-4cf6-9b00-f5d1b9d003a5",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "50cabff2-d252-4929-af18-c53f04edd4fe",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	]
+}
