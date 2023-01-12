@@ -9,4 +9,5 @@ import './game/player_kill.js'
 
 // Directory for misc features, fixes, etc
 import './misc/bow_fix.js'
+import './misc/debug_commands.js'
 
