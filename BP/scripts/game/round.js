@@ -38,19 +38,19 @@ export function endRound() {
     
 }
 
-export function getRoundTime() {
+function getRoundTime() {
     return world.getDynamicProperty("RoundTime")
 }
 
-export function setRoundTime(value) {
+function setRoundTime(value) {
     world.setDynamicProperty("RoundTime", value)
 }
 
-export function isRoundStarted() {
+function isRoundStarted() {
     return world.getDynamicProperty("RoundStarted")
 }
 
-export function setRoundStarted(value) {
+function setRoundStarted(value) {
     world.setDynamicProperty("RoundStarted", value)
 }
 
