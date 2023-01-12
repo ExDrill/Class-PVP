@@ -18,24 +18,21 @@ world.events.tick.subscribe(() => {
 })
 
 world.events.beforeChat.subscribe(event => {
-    if (event.message == "debugStart") {
+    if (event.message == "start") {
         startRound()
     }
 })
 
 export function startRound() {
-    setRoundTime(200)
     world.say("Round started")
-    
     setRoundStarted(true)
+    setRoundTime(200)
 }
 
 export function endRound() {
     world.say("Round ended")
-    world.getAllPlayers().forEach(player => {
-        //if (!player.hasTag("InRound")) continue
-    })
     setRoundStarted(false)
+    setRoundTime(0)
 }
 
 export function getRoundTime() {
