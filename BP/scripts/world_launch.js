@@ -8,15 +8,15 @@ world.events.worldInitialize.subscribe(event => {
 
 function gameProperties() {
     const propertyRegistry = new DynamicPropertiesDefinition()
-    propertyRegistry.defineBoolean("GameStarted")
-    propertyRegistry.defineNumber("GameTime")
+    propertyRegistry.defineBoolean("RoundStarted")
+    propertyRegistry.defineNumber("RoundTime")
     return propertyRegistry
 }
 
 function playerProperties() {
     const propertyRegistry = new DynamicPropertiesDefinition()
     propertyRegistry.defineBoolean("InGame")
-    propertyRegistry.defineString("PlayerClass", 1000)
+    propertyRegistry.defineString("Class", 1000)
     return propertyRegistry
 }
 
