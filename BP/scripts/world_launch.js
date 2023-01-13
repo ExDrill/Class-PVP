@@ -2,7 +2,11 @@ import { world, DynamicPropertiesDefinition } from '@minecraft/server'
 
 world.events.worldInitialize.subscribe(event => {
     event.propertyRegistry.registerWorldDynamicProperties(gameProperties())
-
+    
+    world.getDimension("overworld").runCommandAsync("gamerule pvp false")
+    for (let scoreboard of world.scoreboard.getObjectives()) {
+        world.scoreboard.removeObjective(scoreboard)
+    }
     registerObjective("kills")
 })
 

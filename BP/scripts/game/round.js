@@ -1,15 +1,15 @@
 import { world } from '@minecraft/server'
-import { classList } from '../class/selection.js'
+import * as Round from '../misc/properties.js'
 
 /**
  * Decrements the gametime, while the game is ongoing.
  * Ends the match whenever the game is started and the gametime reaches 0.
  */
 world.events.tick.subscribe(() => {
-    if (isRoundStarted() && getRoundTime() > 0) {
-        setRoundTime(getRoundTime() - 1)
-    } else
-    if (getRoundTime() == 0 && isRoundStarted()) {
+    if (Round.isRoundStarted() && Round.getRoundTime() > 0) {
+        Round.setRoundTime(Round.getRoundTime() - 1)
+    } 
+    else if (Round.getRoundTime() == 0 && Round.isRoundStarted()) {
         endRound()
     }
     else {
@@ -18,40 +18,24 @@ world.events.tick.subscribe(() => {
 })
 
 export function startRound() {
-    if (!isRoundStarted()) {
+    if (!Round.isRoundStarted()) {
         world.say("Round started")
-        setRoundStarted(true)
-        setRoundTime(200)
+        Round.setRoundStarted(true)
+        Round.setRoundTime(6000)
     } else {
         console.error("Failed to start round, there is already an ongoing round!")
     }
 }
 
 export function endRound() {
-    if (isRoundStarted()) {
+    if (Round.isRoundStarted()) {
         world.say("Round ended")
-        setRoundStarted(false)
-        setRoundTime(0)
+        Round.setRoundStarted(false)
+        Round.setRoundTime(0)
     } else {
         console.error("Failed to end round, there is no ongoing round!")
     }
     
-}
-
-function getRoundTime() {
-    return world.getDynamicProperty("RoundTime")
-}
-
-function setRoundTime(value) {
-    world.setDynamicProperty("RoundTime", value)
-}
-
-function isRoundStarted() {
-    return world.getDynamicProperty("RoundStarted")
-}
-
-function setRoundStarted(value) {
-    world.setDynamicProperty("RoundStarted", value)
 }
 
 export function getPlayerCount() {

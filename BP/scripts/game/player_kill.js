@@ -1,4 +1,5 @@
 import { world, MinecraftEffectTypes } from '@minecraft/server'
+import * as Round from '../misc/properties.js'
 
 world.events.entityHurt.subscribe(event => {
     const victim = event.hurtEntity
@@ -9,9 +10,9 @@ world.events.entityHurt.subscribe(event => {
     if (attacker.typeId != 'minecraft:player') return
     
     // Rewards on kill
-    if (victim.getComponent('minecraft:health').current <= 0) {
+    if (victim.getComponent('minecraft:health').current <= 0 && Round.isRoundStarted()) {
         attacker.addEffect(MinecraftEffectTypes.regeneration, 100, 1, true)
-        attacker.runCommandAsync('scoreboard players add @s kills 1')  
+        attacker.runCommandAsync('scoreboard players add @s kills 1')
     }
 })
 
