@@ -1,11 +1,13 @@
-import { world } from '@minecraft/server'
+import { world, system } from '@minecraft/server'
 import * as Round from '../misc/properties.js'
 
 /**
  * Decrements the gametime, while the game is ongoing.
  * Ends the match whenever the game is started and the gametime reaches 0.
  */
-world.events.tick.subscribe(() => {
+system.run(tick)
+
+function tick() {
     if (Round.isRoundStarted() && Round.getRoundTime() > 0) {
         Round.setRoundTime(Round.getRoundTime() - 1)
     } 
@@ -15,11 +17,11 @@ world.events.tick.subscribe(() => {
     else {
         return
     }
-})
+}
 
 export function startRound() {
     if (!Round.isRoundStarted()) {
-        world.say("Round started")
+        world.sendMessage("Round started")
         Round.setRoundStarted(true)
         Round.setRoundTime(6000)
     } else {
@@ -29,7 +31,7 @@ export function startRound() {
 
 export function endRound() {
     if (Round.isRoundStarted()) {
-        world.say("Round ended")
+        world.sendMessage("Round ended")
         Round.setRoundStarted(false)
         Round.setRoundTime(0)
     } else {
