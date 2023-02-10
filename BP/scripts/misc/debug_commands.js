@@ -4,6 +4,7 @@ import { world } from '@minecraft/server'
 import * as Kits from '../class/kits.js'
 import { RegisteredKits } from '../class/kit.js'
 
+// should probably revamp debug commands
 world.events.beforeChat.subscribe(event => {
     const msg = event.message
     const sender = event.sender
