@@ -7,21 +7,28 @@ world.events.beforeItemUse.subscribe(event => {
     const player = event.source as Player
     if (event.source.typeId != "minecraft:player") return
     if (item.typeId != "minecraft:compass") return
-    
+    createUI(player)
+})
+
+function createUI(player: Player) {
     const classSelection = new ActionFormData()
     classSelection.title("Choose your class!")
-    classSelection.button("Knight", "textures/items/iron_sword.png")
-    classSelection.button("Archer", "textures/items/bow_standby.png")
-    classSelection.button("Tank", "textures/items/iron_axe.png")
-    classSelection.button("Gunner", "textures/items/gunpowder.png")
-    
+    for (const kit of Kits.getRegistry()) {
+        const kitName = kit.getName().charAt(0).toUpperCase() + kit.getName().slice(1)
+        classSelection.button(kitName, `textures/icons/${kit.getName()}.png`)
+    }
     classSelection.show(player).then(data => {
         player.triggerEvent('classpvp:reset_class')
         if (!data.canceled) {
-            player.triggerEvent(`classpvp:${Kits.getRegistry()[data.selection].getName()}`)
+            const selectedKit = Kits.getRegistry()[data.selection].getName()
+            try {
+                player.triggerEvent(`classpvp:${selectedKit}`)
+            } catch {
+                console.error(`Class "${selectedKit}" does not have an event`)
+            }   
         }
     })
-})
+}
 
 world.events.beforeChat.subscribe(event => {
     const msg = event.message
@@ -40,6 +47,12 @@ world.events.playerSpawn.subscribe(event => {
     event.player.triggerEvent('classpvp:reset_class')
 })
 
+/*
 world.events.playerLeave.subscribe(event => {
-    world.getAllPlayers()
+    let player: Player = undefined
+    for (const playerFinder of world.getAllPlayers()) {
+        if (playerFinder.name != event.playerName) continue
+        player = playerFinder
+    }
 })
+*/
