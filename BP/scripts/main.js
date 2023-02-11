@@ -2,6 +2,7 @@ import './world_launch.js'
 
 // Directory for Class related functions
 import './class/selection.js'
+import './class/kits.js'
 
 // Directory for mechanics and game handlers
 import './game/round.js'

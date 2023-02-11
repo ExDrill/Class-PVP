@@ -1,6 +1,8 @@
+import { Player } from '@minecraft/server'
+
 class Kit {
-    name = ""
-    items = []
+    name: string
+    items: ItemData[] = []
 
     constructor(name, items) {
         this.name = name
@@ -8,15 +10,15 @@ class Kit {
         RegisteredKits.push(this)
     }
 
-    getName() {
+    getName(): string {
         return this.name
     }
 
-    getItems() {
+    getItems(): ItemData[]  {
         return this.items
     }
 
-    equip(player) {
+    equip(player: Player): void {
         for (let equipment of this.getItems()) {
             player.runCommandAsync(`replaceitem entity @s ${equipment.slot} ${equipment.index} ${equipment.item} 1`)
         }
@@ -24,14 +26,14 @@ class Kit {
 }
 
 export class KitBuilder {
-    name = ""
-    items = []
+    name: string
+    items: ItemData[] = []
 
-    constructor(name = "") {
+    constructor(name: string) {
         this.name = name
     }
 
-    addItem(item = "", hotbarIndex) {
+    addItem(item: string, hotbarIndex: number): KitBuilder {
         this.items.push({
             item: item,
             slot: "slot.hotbar",
@@ -40,7 +42,7 @@ export class KitBuilder {
         return this
     }
 
-    addArmor(item, armorSlot) {
+    addArmor(item: string, armorSlot: ArmorSlot): KitBuilder {
         this.items.push({
             item: item,
             slot: armorSlot,
@@ -49,18 +51,24 @@ export class KitBuilder {
         return this
     }
 
-    build() {
+    build(): Kit {
         return new Kit(this.name, this.items);
     }
 }
 
-export const ArmorSlot = Object.freeze({
-    HELMET: "slot.armor.head",
-    CHESTPLATE: "slot.armor.chest",
-    LEGGINGS: "slot.armor.legs",
-    BOOTS: "slot.armor.feet"
-})
+export type ItemData = {
+    item: string,
+    slot: string,
+    index: number
+}
 
-export const RegisteredKits = [
-   
+export enum ArmorSlot {
+    helmet = "slot.armor.head",
+    chestplate = "slot.armor.chest",
+    leggings = "slot.armor.legs",
+    boots = "slot.armor.feet" 
+}
+
+export const RegisteredKits: Kit[] = [
+    
 ]

@@ -1,16 +1,10 @@
-import { world } from '@minecraft/server'
+import { world, Player } from '@minecraft/server'
 import { ActionFormData } from '@minecraft/server-ui'
-
-export const classList = [
-    "knight",
-    "archer",
-    "tank",
-    "gunner"
-]
+import * as Kits from './kits.js'
 
 world.events.beforeItemUse.subscribe(event => {
     const item = event.item
-    const player = event.source
+    const player = event.source as Player
     if (event.source.typeId != "minecraft:player") return
     if (item.typeId != "minecraft:compass") return
     
@@ -23,9 +17,8 @@ world.events.beforeItemUse.subscribe(event => {
     
     classSelection.show(player).then(data => {
         player.triggerEvent('classpvp:reset_class')
-        if (data.canceled) {
-        } else {
-            player.triggerEvent(`classpvp:${classList[data.selection]}`)
+        if (!data.canceled) {
+            player.triggerEvent(`classpvp:${Kits.getRegistry()[data.selection].getName()}`)
         }
     })
 })
@@ -33,13 +26,14 @@ world.events.beforeItemUse.subscribe(event => {
 world.events.beforeChat.subscribe(event => {
     const msg = event.message
     const player = event.sender
-    classList.forEach(playerClass => {
-        if (msg == playerClass) {
-            player.triggerEvent(`classpvp:${playerClass}`)
+
+    for (const kit of Kits.getRegistry()) {
+        if (msg == kit.getName()) {
+            player.triggerEvent(`classpvp:${kit.getName()}`)
         } else if (msg == "reset") {
             player.triggerEvent('classpvp:reset_class')
         }
-    })
+    }
 })
 
 world.events.playerSpawn.subscribe(event => {
@@ -47,7 +41,5 @@ world.events.playerSpawn.subscribe(event => {
 })
 
 world.events.playerLeave.subscribe(event => {
-    world.getPlayers({
-        name: event.playerName
-    })
+    world.getAllPlayers()
 })

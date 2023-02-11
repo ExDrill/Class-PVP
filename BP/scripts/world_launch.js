@@ -14,6 +14,7 @@ function gameProperties() {
     const propertyRegistry = new DynamicPropertiesDefinition()
     propertyRegistry.defineBoolean("RoundStarted")
     propertyRegistry.defineNumber("RoundTime")
+    propertyRegistry.defineString("Spawnpoints", 3000)
     return propertyRegistry
 }
 
