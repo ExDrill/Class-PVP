@@ -10,22 +10,12 @@ world.events.beforeChat.subscribe(event => {
     const prefix = "!"
 
     function createDebugCommand(id: string, onSend: () => void) {
-        if (msg.startsWith(prefix + id) && sender.hasTag("debug")) {
+        if (msg.startsWith(prefix + id) && sender.isOp()) {
             onSend()
             event.cancel = true
             return true
         }
         return false
-    }
-    
-    if (sender.isOp() && msg == "toggleDebug") {
-        if (!sender.hasTag("debug")) {
-            sender.addTag("debug")
-            world.sendMessage(`${sender.name} has enabled debug mode`)
-        } else {
-            sender.removeTag("debug")
-            world.sendMessage(`${sender.name} has disabled debug mode`)
-        }
     }
 
     createDebugCommand("game start", () => RoundHandler.startRound())
