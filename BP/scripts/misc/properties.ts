@@ -1,7 +1,7 @@
 import { world } from '@minecraft/server'
 
 export function getRoundTime() {
-    return world.getDynamicProperty("RoundTime")
+    return world.getDynamicProperty("RoundTime") as number
 }
 
 export function setRoundTime(value) {
@@ -9,7 +9,7 @@ export function setRoundTime(value) {
 }
 
 export function isRoundStarted() {
-    return world.getDynamicProperty("RoundStarted")
+    return world.getDynamicProperty("RoundStarted") as boolean
 }
 
 export function setRoundStarted(value) {
